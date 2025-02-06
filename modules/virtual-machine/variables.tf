@@ -41,6 +41,7 @@ variable "networks" {
 
 variable "network_data" {
   type        = string
+  default     = ""
   description = "Network data to use for the VM"
 }
 

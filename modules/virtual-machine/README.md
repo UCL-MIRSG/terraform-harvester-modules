@@ -37,7 +37,7 @@ No modules.
 | <a name="input_memory"></a> [memory](#input\_memory) | n/a | `string` | `"16Gi"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the vm | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Name of the namespace into which the VMs with be delployed. It must exist | `string` | n/a | yes |
-| <a name="input_network_data"></a> [network\_data](#input\_network\_data) | Network data to use for the VM | `string` | n/a | yes |
+| <a name="input_network_data"></a> [network\_data](#input\_network\_data) | Network data to use for the VM | `string` | `""` | no |
 | <a name="input_networks"></a> [networks](#input\_networks) | Map of harvester VM networks to add NICs for | <pre>map(object({<br/>    ip      = string<br/>    cidr    = number<br/>    gateway = string<br/>    dns     = string<br/>    network = string<br/>    iface   = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_primary_interface"></a> [primary\_interface](#input\_primary\_interface) | The primary interface to use for the VM | `string` | n/a | yes |
 | <a name="input_root_disk_size"></a> [root\_disk\_size](#input\_root\_disk\_size) | n/a | `string` | `"30Gi"` | no |
