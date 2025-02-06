@@ -4,11 +4,6 @@ variable "name" {
   description = "Name of the vm"
 }
 
-variable "appstream_repo_url" {
-  type    = string
-  default = ""
-}
-
 variable "additional_disks" {
   type = map(object({
     name  = string
@@ -17,23 +12,18 @@ variable "additional_disks" {
   }))
 }
 
-variable "baseos_repo_url" {
-  type    = string
-  default = ""
-}
-
 variable "cpu" {
   type    = number
-  default = 4
+  default = 2
 }
 
 variable "efi_boot" {
   type = bool
 }
 
-variable "memory" {
-  type    = string
-  default = "32Gi"
+variable "namespace" {
+  type        = string
+  description = "Name of the namespace into which the VMs with be delployed. It must exist"
 }
 
 variable "networks" {
@@ -49,9 +39,14 @@ variable "networks" {
   description = "Map of harvester VM networks to add NICs for"
 }
 
-variable "namespace" {
+variable "network_data" {
   type        = string
-  description = "Name of the namespace into which the VMs with be delployed. It must exist"
+  description = "Network data to use for the VM"
+}
+
+variable "memory" {
+  type    = string
+  default = "16Gi"
 }
 
 variable "primary_interface" {
@@ -69,12 +64,13 @@ variable "run_strategy" {
   default = "RerunOnFailure"
 }
 
-variable "ssh_public_key" {
+variable "ssh_private_key" {
   type = string
 }
 
-variable "ssh_private_key" {
-  type = string
+variable "user_data" {
+  type        = string
+  description = "Data for cloud-init to use"
 }
 
 variable "vm_image" {

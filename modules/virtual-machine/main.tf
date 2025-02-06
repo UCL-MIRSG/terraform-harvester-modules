@@ -59,31 +59,23 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   cloudinit {
-    user_data = templatefile("${path.module}/templates/user_data.yaml.tftpl", {
-      additional_disks   = try(var.additional_disks, "")
-      appstream_repo_url = var.appstream_repo_url
-      baseos_repo_url    = var.baseos_repo_url
-      ssh_public_key     = var.ssh_public_key
-    })
-
-    network_data = templatefile("${path.module}/templates/network_data.yaml.tftpl", {
-      networks = var.networks
-    })
+    user_data    = var.user_data
+    network_data = var.network_data
   }
 }
 
-# resource "null_resource" "connection_test" {
-#   depends_on = [harvester_virtualmachine.vm]
-#   connection {
-#     type        = "ssh"
-#     user        = var.vm_username
-#     private_key = var.ssh_private_key
-#     host        = var.networks[var.primary_interface].ip
-#   }
+resource "null_resource" "connection_test" {
+  depends_on = [harvester_virtualmachine.vm]
+  connection {
+    type        = "ssh"
+    user        = var.vm_username
+    private_key = var.ssh_private_key
+    host        = var.networks[var.primary_interface].ip
+  }
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "echo 'connection successful!'"
-#     ]
-#   }
-# }
+  provisioner "remote-exec" {
+    inline = [
+      "echo 'connection successful!'"
+    ]
+  }
+}
