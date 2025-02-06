@@ -28,4 +28,5 @@ jobs:
 
       - uses: UCL-MIRSG/.github/actions/linting@28758d17f7fe68723aded1c5dc6a3f57ccdf9cb7 # v0
         with:
+          ansible-roles-config: ./modules/k3s-cluster/provision/ansible/requirements.yaml
           pre-commit-config: ./.pre-commit-config.yaml
