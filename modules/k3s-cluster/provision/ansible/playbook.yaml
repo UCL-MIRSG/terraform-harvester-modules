@@ -1,4 +1,12 @@
 ---
+- name: Test that image server VM is ready
+  hosts: k3s
+  gather_facts: false
+  tasks:
+    - name: Wait for VM
+      ansible.builtin.wait_for_connection:
+        timeout: 60
+
 - name: Install k3s
   hosts: k3s
   become: true
