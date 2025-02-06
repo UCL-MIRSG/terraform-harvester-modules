@@ -25,6 +25,8 @@ variable "openiscsi_version" {}
 
 variable "primary_interface" {}
 
+variable "ssh_common_args" {}
+
 variable "ssh_private_key" {}
 
 variable "vm_username" {}

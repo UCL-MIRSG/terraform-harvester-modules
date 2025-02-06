@@ -116,6 +116,11 @@ variable "run_strategy" {
   default = "RerunOnFailure"
 }
 
+variable "ssh_common_args" {
+  type    = string
+  default = ""
+}
+
 variable "vm_count" {
   type        = number
   default     = 3
@@ -130,12 +135,6 @@ variable "vm_image" {
 variable "vm_image_namespace" {
   type        = string
   description = "OS image  namespace to use"
-}
-
-variable "vm_prefix" {
-  type        = string
-  default     = "vm"
-  description = "Prefix to apply to VM names"
 }
 
 variable "vm_username" {

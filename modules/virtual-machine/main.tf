@@ -65,19 +65,3 @@ resource "harvester_virtualmachine" "vm" {
     })
   }
 }
-
-resource "null_resource" "connection_test" {
-  depends_on = [harvester_virtualmachine.vm]
-  connection {
-    type        = "ssh"
-    user        = var.vm_username
-    private_key = var.ssh_private_key
-    host        = harvester_virtualmachine.vm.network_interface[0].ip_address
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo 'connection successful!'"
-    ]
-  }
-}
