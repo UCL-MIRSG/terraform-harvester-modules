@@ -132,12 +132,6 @@ variable "vm_image_namespace" {
   description = "OS image  namespace to use"
 }
 
-variable "vm_prefix" {
-  type        = string
-  default     = "vm"
-  description = "Prefix to apply to VM names"
-}
-
 variable "vm_username" {
   type = string
 
