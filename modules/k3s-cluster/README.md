@@ -22,8 +22,8 @@ A terraform module for installing k3s on harvester VMs.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_install_k3s"></a> [install\_k3s](#module\_install\_k3s) | ./k3s | n/a |
-| <a name="module_k3s_server_vm"></a> [k3s\_server\_vm](#module\_k3s\_server\_vm) | ./server | n/a |
+| <a name="module_install_k3s"></a> [install\_k3s](#module\_install\_k3s) | ./provision | n/a |
+| <a name="module_k3s_server_vm"></a> [k3s\_server\_vm](#module\_k3s\_server\_vm) | ../virtual-machine | n/a |
 
 ## Resources
 

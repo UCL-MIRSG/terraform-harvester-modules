@@ -1,6 +1,6 @@
 module "k3s_server_vm" {
   count  = local.vm_count
-  source = "./server"
+  source = "../virtual-machine"
 
   appstream_repo_url = var.appstream_repo_url
   additional_disks   = var.additional_disks
@@ -34,7 +34,7 @@ module "k3s_server_vm" {
 
 module "install_k3s" {
   depends_on = [module.k3s_server_vm]
-  source     = "./k3s"
+  source     = "./provision"
 
   calico_version     = var.calico_version
   cluster_vip        = var.cluster_vip
