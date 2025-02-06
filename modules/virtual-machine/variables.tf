@@ -39,20 +39,9 @@ variable "networks" {
   description = "Map of harvester VM networks to add NICs for"
 }
 
-variable "network_data" {
-  type        = string
-  default     = ""
-  description = "Network data to use for the VM"
-}
-
 variable "memory" {
   type    = string
   default = "16Gi"
-}
-
-variable "primary_interface" {
-  type        = string
-  description = "The primary interface to use for the VM"
 }
 
 variable "root_disk_size" {
@@ -67,6 +56,11 @@ variable "run_strategy" {
 
 variable "ssh_private_key" {
   type = string
+}
+
+variable "enable_dhcp" {
+  type    = bool
+  default = false
 }
 
 variable "user_data" {

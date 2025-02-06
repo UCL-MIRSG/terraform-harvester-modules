@@ -59,8 +59,10 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   cloudinit {
-    user_data    = var.user_data
-    network_data = var.network_data
+    user_data = var.user_data
+    network_data = var.enable_dhcp ? "" : templatefile("${path.module}/templates/network_data.yaml.tftpl", {
+      networks = var.networks
+    })
   }
 }
 
@@ -70,7 +72,7 @@ resource "null_resource" "connection_test" {
     type        = "ssh"
     user        = var.vm_username
     private_key = var.ssh_private_key
-    host        = var.networks[var.primary_interface].ip
+    host        = harvester_virtualmachine.vm.network_interface[0].ip_address
   }
 
   provisioner "remote-exec" {
