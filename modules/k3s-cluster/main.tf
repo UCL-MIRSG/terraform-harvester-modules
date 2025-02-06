@@ -48,6 +48,7 @@ module "install_k3s" {
   metallb_version    = var.metallb_version
   openiscsi_version  = var.openiscsi_version
   primary_interface  = var.primary_interface
+  ssh_common_args    = var.ssh_common_args
   ssh_private_key    = tls_private_key.ssh.private_key_openssh
   vm_username        = var.vm_username
   workers            = local.workers

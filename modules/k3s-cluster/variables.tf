@@ -116,6 +116,11 @@ variable "run_strategy" {
   default = "RerunOnFailure"
 }
 
+variable "ssh_common_args" {
+  type    = string
+  default = ""
+}
+
 variable "vm_count" {
   type        = number
   default     = 3

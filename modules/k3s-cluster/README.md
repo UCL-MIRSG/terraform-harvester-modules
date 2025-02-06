@@ -51,6 +51,7 @@
 | <a name="input_primary_interface"></a> [primary\_interface](#input\_primary\_interface) | Name of the primary network interface | `string` | `"eth0"` | no |
 | <a name="input_root_disk_size"></a> [root\_disk\_size](#input\_root\_disk\_size) | n/a | `string` | `"30Gi"` | no |
 | <a name="input_run_strategy"></a> [run\_strategy](#input\_run\_strategy) | n/a | `string` | `"RerunOnFailure"` | no |
+| <a name="input_ssh_common_args"></a> [ssh\_common\_args](#input\_ssh\_common\_args) | n/a | `string` | `""` | no |
 | <a name="input_vm_count"></a> [vm\_count](#input\_vm\_count) | How many VMs to create | `number` | `3` | no |
 | <a name="input_vm_image"></a> [vm\_image](#input\_vm\_image) | OS image to use | `string` | n/a | yes |
 | <a name="input_vm_image_namespace"></a> [vm\_image\_namespace](#input\_vm\_image\_namespace) | OS image  namespace to use | `string` | n/a | yes |
