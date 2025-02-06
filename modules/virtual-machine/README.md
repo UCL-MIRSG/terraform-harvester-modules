@@ -13,7 +13,6 @@
 | Name | Version |
 |------|---------|
 | <a name="provider_harvester"></a> [harvester](#provider\_harvester) | 0.6.4 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.2.2 |
 
 ## Modules
 
@@ -24,7 +23,6 @@ No modules.
 | Name | Type |
 |------|------|
 | [harvester_virtualmachine.vm](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/resources/virtualmachine) | resource |
-| [null_resource.connection_test](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
 | [harvester_image.vm_image](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/data-sources/image) | data source |
 
 ## Inputs
