@@ -28,16 +28,16 @@ repos:
           - markdown
           - --output-file
           - README.md
-          - .
+          - modules/k3s-cluster
       - id: terraform-docs-go
         args:
           - markdown
           - --output-file
           - README.md
-          - server
+          - modules/k3s-cluster/provision
       - id: terraform-docs-go
         args:
           - markdown
           - --output-file
           - README.md
-          - k3s
+          - modules/virtual-machine
