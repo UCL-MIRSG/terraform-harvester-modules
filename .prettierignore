@@ -1,0 +1,3 @@
+# Ignore terraform-docs generated files
+**/README.md
+README.md

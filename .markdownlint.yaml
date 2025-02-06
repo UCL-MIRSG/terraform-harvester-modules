@@ -1,0 +1,13 @@
+---
+MD013:
+  tables: false
+
+MD033:
+  allowed_elements:
+    - a
+    - br
+    - pre
+
+MD034: false
+
+MD041: false

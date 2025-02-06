@@ -1,0 +1,65 @@
+---
+- name: Download metallb manifest
+  ansible.builtin.get_url:
+    url:
+      https://raw.githubusercontent.com/metallb/metallb/\ {{ metallb_version
+      }}/config/manifests/metallb-native.yaml
+    dest: /tmp/metallb.yaml
+    mode: "0440"
+
+- name: Apply metallb manifest
+  kubernetes.core.k8s:
+    state: present
+    src: /tmp/metallb.yaml
+
+- name: Wait for metallb pods
+  kubernetes.core.k8s_info:
+    kind: Pod
+    namespace: metallb-system
+    wait: true
+    wait_condition:
+      type: Ready
+    wait_timeout: 90
+
+- name: Wait for metallb controller
+  kubernetes.core.k8s_info:
+    kind: Deployment
+    name: controller
+    namespace: metallb-system
+    wait: true
+    wait_condition:
+      type: Available
+    wait_timeout: 90
+
+- name: Wait for metallb apiservice
+  kubernetes.core.k8s_info:
+    kind: APIService
+    name: v1beta1.metallb.io
+    namespace: metallb-system
+    wait: true
+    wait_condition:
+      type: Available
+    wait_timeout: 90
+
+- name: Metallb AddressPool
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: metallb.io/v1beta1
+      kind: IPAddressPool
+      metadata:
+        name: first-pool
+        namespace: metallb-system
+      spec:
+        addresses:
+          - "{{ cluster_vip }}/32"
+
+- name: Metallb L2Advertisement
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: metallb.io/v1beta1
+      kind: L2Advertisement
+      metadata:
+        name: ingress
+        namespace: metallb-system

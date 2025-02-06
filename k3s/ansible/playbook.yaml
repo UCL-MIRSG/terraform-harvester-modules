@@ -1,0 +1,45 @@
+---
+- name: Install k3s
+  hosts: k3s
+  become: true
+  gather_facts: true
+  roles:
+    - provision
+    - k3s
+
+- name: Install Calico and Metallb
+  hosts: leader
+  become: true
+  roles:
+    - calico
+    - metallb
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+
+- name: OpenISCSI install
+  hosts: k3s
+  become: true
+  roles:
+    - openiscsi
+
+- name: Fetch kubeconfig
+  hosts: leader
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Fetch kubeconfig
+      ansible.builtin.fetch:
+        src: /etc/rancher/k3s/k3s.yaml
+        dest: "{{ kubeconfig_path }}"
+        flat: true
+
+- name: Modify kubeconfig file
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Replace IP in kubeconfig
+      ansible.builtin.lineinfile:
+        path: "{{ kubeconfig_path }}"
+        regexp: "server:"
+        line: "    server: https://{{ leader_ip }}:6443"
+        state: present

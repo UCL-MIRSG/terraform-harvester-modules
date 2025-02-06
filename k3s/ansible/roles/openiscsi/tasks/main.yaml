@@ -1,0 +1,13 @@
+---
+- name: Install
+  when: openiscsi_version != ""
+  ansible.builtin.package:
+    name: iscsi-initiator-utils-{{ openiscsi_version }}
+    state: present
+
+- name: Enable service
+  when: openiscsi_version != ""
+  ansible.builtin.systemd_service:
+    name: iscsid.service
+    state: started
+    enabled: true
