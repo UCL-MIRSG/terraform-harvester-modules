@@ -2,7 +2,7 @@
 - name: Download metallb manifest
   ansible.builtin.get_url:
     url:
-      https://raw.githubusercontent.com/metallb/metallb/\ {{ metallb_version
+      https://raw.githubusercontent.com/metallb/metallb/{{ metallb_version
       }}/config/manifests/metallb-native.yaml
     dest: /tmp/metallb.yaml
     mode: "0440"
