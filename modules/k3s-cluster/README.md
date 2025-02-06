@@ -1,7 +1,3 @@
-# terraform-harvester-k3s
-
-A terraform module for installing k3s on harvester VMs.
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

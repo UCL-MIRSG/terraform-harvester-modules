@@ -1,16 +1,5 @@
 locals {
   ips = var.networks[var.primary_interface].ips
-  networks = [for vm in range(local.vm_count) : {
-    for key, value in var.networks : key =>
-    {
-      cidr    = value.cidr
-      dns     = value.dns
-      gateway = value.gateway
-      iface   = key
-      ip      = value.ips[vm]
-      network = value.network
-    }
-  }]
 
   leader_name = "${var.vm_prefix}-${var.cluster_name}-control-0"
   leader_ip   = local.ips[0]
