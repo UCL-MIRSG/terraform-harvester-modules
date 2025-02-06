@@ -1,6 +1,43 @@
 ---
 repos:
   - repo: https://github.com/UCL-MIRSG/.github
-    rev: v0.182.0
+    rev: v0.195.0
     hooks:
       - id: mirsg-hooks
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args:
+          - --baseline
+          - .secrets.baseline
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.97.3
+    hooks:
+      - id: terraform_fmt
+        args:
+          - --args=-diff
+      - id: terraform_validate
+        args:
+          - --tf-init-args=-upgrade
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: v0.19.0
+    hooks:
+      - id: terraform-docs-go
+        args:
+          - markdown
+          - --output-file
+          - README.md
+          - modules/k3s-cluster
+      - id: terraform-docs-go
+        args:
+          - markdown
+          - --output-file
+          - README.md
+          - modules/k3s-cluster/provision
+      - id: terraform-docs-go
+        args:
+          - markdown
+          - --output-file
+          - README.md
+          - modules/virtual-machine

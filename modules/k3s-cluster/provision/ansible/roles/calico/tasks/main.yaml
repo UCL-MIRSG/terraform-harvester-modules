@@ -1,0 +1,59 @@
+---
+- name: Download tigera-operator manifest
+  ansible.builtin.get_url:
+    url:
+      https://raw.githubusercontent.com/projectcalico/calico/{{ calico_version
+      }}/manifests/tigera-operator.yaml
+    dest: /tmp/tigera-operator.yaml
+    mode: "0440"
+
+- name: Install tigera-operator
+  kubernetes.core.k8s:
+    state: present
+    src: /tmp/tigera-operator.yaml
+
+- name: Download calico CRD manifest
+  ansible.builtin.get_url:
+    url:
+      https://raw.githubusercontent.com/projectcalico/calico/{{ calico_version
+      }}/manifests/custom-resources.yaml
+    dest: /tmp/calico-resources.yaml
+    mode: "0440"
+
+- name: Install calico CRDs
+  kubernetes.core.k8s:
+    state: present
+    src: /tmp/calico-resources.yaml
+
+- name: Install calico api server
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operator.tigera.io/v1
+      kind: APIServer
+      metadata:
+        name: default
+      spec: {}
+
+- name: Download calicoctl
+  ansible.builtin.get_url:
+    url:
+      https://github.com/projectcalico/calico/releases/download/{{
+      calico_version }}/calicoctl-linux-amd64
+    dest: /usr/local/bin/calicoctl
+    mode: "0755"
+
+- name: Write calico BGP config
+  ansible.builtin.template:
+    src: calico_bgp.yaml.j2
+    dest: /tmp/calico_bgp.yaml
+    mode: "0440"
+
+- name: Use calicoctl to install BGP
+  ansible.builtin.command:
+    cmd:
+      /usr/local/bin/calicoctl create --allow-version-mismatch --skip-exists -f
+      /tmp/calico_bgp.yaml
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  changed_when: false

@@ -1,0 +1,49 @@
+#cloud-config
+%{ if (appstream_repo_url != "") && (baseos_repo_url != "")}
+write_files:
+
+  - content: |
+      [local-rhel9-x86_64-BaseOS]
+      name=Repository for rhel9/x86_64/BaseOS
+      baseurl=${baseos_repo_url}
+      enabled=1
+      gpgcheck=0
+
+      [local-rhel9-x86_64-AppStream]
+      name=Repository for rhel9/x86_64/AppStream
+      baseurl=${appstream_repo_url}
+      enabled=1
+      gpgcheck=0
+    path: /etc/yum.repos.d/local-repository-0.repo
+    permissions: '0644'
+%{ endif }
+
+%{ if additional_disks != ""}
+fs_setup:
+%{ for disk in additional_disks }
+  - cmd: mkfs -t %(filesystem)s -L %(label)s %(device)s
+    label: ${disk.name}
+    filesystem: xfs
+    overwrite: false
+    device: /dev/sda
+%{ endfor ~}
+
+mounts:
+%{ for disk in additional_disks }
+  - [/dev/sda, ${disk.mount}, xfs, "defaults,nofail", "0", "2"]
+%{ endfor ~}
+%{ endif ~}
+
+package_update: true
+
+packages:
+  - qemu-guest-agent
+
+runcmd:
+  - - systemctl
+    - enable
+    - --now
+    - qemu-guest-agent.service
+
+ssh_authorized_keys:
+  - ${ssh_public_key}
