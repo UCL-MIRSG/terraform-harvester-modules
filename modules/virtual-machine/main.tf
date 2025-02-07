@@ -9,9 +9,7 @@ resource "harvester_virtualmachine" "vm" {
   restart_after_update = true
   run_strategy         = var.run_strategy
   description          = "Rancher k3s ${data.harvester_image.vm_image.display_name}"
-  tags = {
-    ssh-user = var.vm_username
-  }
+  tags                 = var.vm_tags
 
   cpu    = var.cpu
   memory = var.memory

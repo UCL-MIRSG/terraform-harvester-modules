@@ -43,6 +43,7 @@ No modules.
 | <a name="input_user_data"></a> [user\_data](#input\_user\_data) | Data for cloud-init to use | `string` | n/a | yes |
 | <a name="input_vm_image"></a> [vm\_image](#input\_vm\_image) | OS image to use | `string` | `"rhel-9.3"` | no |
 | <a name="input_vm_image_namespace"></a> [vm\_image\_namespace](#input\_vm\_image\_namespace) | OS image namespace to use | `string` | `""` | no |
+| <a name="input_vm_tags"></a> [vm\_tags](#input\_vm\_tags) | n/a | `map(any)` | n/a | yes |
 | <a name="input_vm_username"></a> [vm\_username](#input\_vm\_username) | n/a | `string` | n/a | yes |
 
 ## Outputs

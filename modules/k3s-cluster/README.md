@@ -55,6 +55,7 @@
 | <a name="input_vm_count"></a> [vm\_count](#input\_vm\_count) | How many VMs to create | `number` | `3` | no |
 | <a name="input_vm_image"></a> [vm\_image](#input\_vm\_image) | OS image to use | `string` | n/a | yes |
 | <a name="input_vm_image_namespace"></a> [vm\_image\_namespace](#input\_vm\_image\_namespace) | OS image  namespace to use | `string` | n/a | yes |
+| <a name="input_vm_tags"></a> [vm\_tags](#input\_vm\_tags) | n/a | `map(any)` | n/a | yes |
 | <a name="input_vm_username"></a> [vm\_username](#input\_vm\_username) | n/a | `string` | n/a | yes |
 | <a name="input_worker_nodes"></a> [worker\_nodes](#input\_worker\_nodes) | Number of worker nodes to deploy | `number` | `0` | no |
 
