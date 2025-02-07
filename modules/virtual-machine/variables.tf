@@ -80,6 +80,10 @@ variable "vm_image_namespace" {
   description = "OS image namespace to use"
 }
 
+variable "vm_tags" {
+  type = map(any)
+}
+
 variable "vm_username" {
   type = string
 }
