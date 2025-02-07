@@ -30,6 +30,7 @@ module "k3s_server_vm" {
   })
   vm_image           = var.vm_image
   vm_image_namespace = var.vm_image_namespace
+  vm_tags            = var.vm_tags
   vm_username        = var.vm_username
 }
 
