@@ -50,6 +50,7 @@ No modules.
 | <a name="input_metallb_version"></a> [metallb\_version](#input\_metallb\_version) | n/a | `any` | n/a | yes |
 | <a name="input_openiscsi_version"></a> [openiscsi\_version](#input\_openiscsi\_version) | n/a | `any` | n/a | yes |
 | <a name="input_primary_interface"></a> [primary\_interface](#input\_primary\_interface) | n/a | `any` | n/a | yes |
+| <a name="input_private_registries"></a> [private\_registries](#input\_private\_registries) | n/a | `any` | n/a | yes |
 | <a name="input_ssh_common_args"></a> [ssh\_common\_args](#input\_ssh\_common\_args) | n/a | `any` | n/a | yes |
 | <a name="input_ssh_private_key"></a> [ssh\_private\_key](#input\_ssh\_private\_key) | n/a | `any` | n/a | yes |
 | <a name="input_vm_username"></a> [vm\_username](#input\_vm\_username) | n/a | `any` | n/a | yes |

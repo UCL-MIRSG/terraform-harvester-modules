@@ -49,6 +49,7 @@
 | <a name="input_networks"></a> [networks](#input\_networks) | Map of harvester VM networks to add NICs for. Key should be interface name. | <pre>map(object({<br/>    ips     = list(string)<br/>    cidr    = number<br/>    gateway = string<br/>    dns     = string<br/>    network = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_openiscsi_version"></a> [openiscsi\_version](#input\_openiscsi\_version) | Version of openiscsi to install on Harvester VMs. | `string` | `""` | no |
 | <a name="input_primary_interface"></a> [primary\_interface](#input\_primary\_interface) | Name of the primary network interface | `string` | `"eth0"` | no |
+| <a name="input_private_registries"></a> [private\_registries](#input\_private\_registries) | List of private container image registries to use in the cluster | `list(map(string))` | `[]` | no |
 | <a name="input_root_disk_size"></a> [root\_disk\_size](#input\_root\_disk\_size) | n/a | `string` | `"30Gi"` | no |
 | <a name="input_run_strategy"></a> [run\_strategy](#input\_run\_strategy) | n/a | `string` | `"RerunOnFailure"` | no |
 | <a name="input_ssh_common_args"></a> [ssh\_common\_args](#input\_ssh\_common\_args) | n/a | `string` | `""` | no |

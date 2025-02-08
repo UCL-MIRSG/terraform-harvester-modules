@@ -1,0 +1,14 @@
+{% for registry in private_registries %}
+mirrors:
+  {{ registry.registry }}:
+    endpoint:
+      - {{ registry.endpoint }}
+configs:
+  {{ registry.registry }}:
+    auth:
+      username: {{ registry.username }}
+      password: {{ registry.password }}
+      token: {{ registry.token }}
+    tls:
+      insecure_skip_verify: true
+{% endfor %}

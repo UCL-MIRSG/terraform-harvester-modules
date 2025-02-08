@@ -21,12 +21,13 @@ locals {
       "-o ControlPath=~/%r@%h:%p",
       var.ssh_common_args
     ])
-    ansible_user      = var.vm_username
-    k3s_version       = var.k3s_version
-    kubeconfig_path   = local.kubeconfig_path
-    leader_ip         = var.leader_ip
-    node_token        = local.node_token
-    openiscsi_version = var.openiscsi_version
+    ansible_user       = var.vm_username
+    k3s_version        = var.k3s_version
+    kubeconfig_path    = local.kubeconfig_path
+    leader_ip          = var.leader_ip
+    node_token         = local.node_token
+    openiscsi_version  = var.openiscsi_version
+    private_registries = yamlencode(var.private_registries)
   }
 
   server_ansible_args = {
