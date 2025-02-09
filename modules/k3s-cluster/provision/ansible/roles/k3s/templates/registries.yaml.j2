@@ -1,4 +1,4 @@
-{% for registry in private_registries %}
+{% for registry in (private_registries | from_yaml) %}
 mirrors:
   {{ registry.registry }}:
     endpoint:
@@ -8,7 +8,7 @@ configs:
     auth:
       username: {{ registry.username }}
       password: {{ registry.password }}
-      token: {{ registry.token }}
+      token: {{ registry.token | default("") }}
     tls:
       insecure_skip_verify: true
 {% endfor %}
