@@ -35,3 +35,10 @@
         K3S_TOKEN: "{{ node_token }}"
         K3S_URL: "{{ k3s_url | default('') }}"
       changed_when: true
+
+- name: Configure private registries
+  ansible.builtin.template:
+    src: registries.yaml.j2
+    dest: /etc/rancher/k3s/registries.yaml
+    mode: "0600"
+  when: private_registries | length > 0

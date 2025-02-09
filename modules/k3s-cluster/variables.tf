@@ -106,6 +106,12 @@ variable "primary_interface" {
   default     = "eth0"
 }
 
+variable "private_registries" {
+  type        = list(map(string))
+  description = "List of private container image registries to use in the cluster"
+  default     = []
+}
+
 variable "root_disk_size" {
   type    = string
   default = "30Gi"
