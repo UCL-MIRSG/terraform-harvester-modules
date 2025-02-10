@@ -44,8 +44,8 @@ module "install_k3s" {
   follower_names     = local.follower_names
   ips                = module.k3s_server_vm.*.ip
   k3s_version        = var.k3s_version
-  local_storage_path = var.local_storage_path
   leader_name        = local.leader_name
+  local_storage_path = var.local_storage_path
   metallb_version    = var.metallb_version
   openiscsi_version  = var.openiscsi_version
   primary_interface  = var.primary_interface
