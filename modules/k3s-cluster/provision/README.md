@@ -42,9 +42,9 @@ No modules.
 | <a name="input_cluster_cidr"></a> [cluster\_cidr](#input\_cluster\_cidr) | n/a | `string` | `"192.168.0.0/16"` | no |
 | <a name="input_cluster_vip"></a> [cluster\_vip](#input\_cluster\_vip) | n/a | `any` | n/a | yes |
 | <a name="input_data_dir"></a> [data\_dir](#input\_data\_dir) | n/a | `any` | n/a | yes |
-| <a name="input_followers"></a> [followers](#input\_followers) | n/a | `any` | n/a | yes |
+| <a name="input_follower_names"></a> [follower\_names](#input\_follower\_names) | n/a | `any` | n/a | yes |
+| <a name="input_ips"></a> [ips](#input\_ips) | n/a | `any` | n/a | yes |
 | <a name="input_k3s_version"></a> [k3s\_version](#input\_k3s\_version) | n/a | `any` | n/a | yes |
-| <a name="input_leader_ip"></a> [leader\_ip](#input\_leader\_ip) | n/a | `any` | n/a | yes |
 | <a name="input_leader_name"></a> [leader\_name](#input\_leader\_name) | n/a | `any` | n/a | yes |
 | <a name="input_local_storage_path"></a> [local\_storage\_path](#input\_local\_storage\_path) | n/a | `any` | n/a | yes |
 | <a name="input_metallb_version"></a> [metallb\_version](#input\_metallb\_version) | n/a | `any` | n/a | yes |
@@ -54,7 +54,7 @@ No modules.
 | <a name="input_ssh_common_args"></a> [ssh\_common\_args](#input\_ssh\_common\_args) | n/a | `any` | n/a | yes |
 | <a name="input_ssh_private_key"></a> [ssh\_private\_key](#input\_ssh\_private\_key) | n/a | `any` | n/a | yes |
 | <a name="input_vm_username"></a> [vm\_username](#input\_vm\_username) | n/a | `any` | n/a | yes |
-| <a name="input_workers"></a> [workers](#input\_workers) | n/a | `any` | n/a | yes |
+| <a name="input_worker_names"></a> [worker\_names](#input\_worker\_names) | n/a | `any` | n/a | yes |
 
 ## Outputs
 

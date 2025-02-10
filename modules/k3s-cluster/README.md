@@ -64,6 +64,7 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_ips"></a> [ips](#output\_ips) | n/a |
 | <a name="output_kubeconfig"></a> [kubeconfig](#output\_kubeconfig) | n/a |
 | <a name="output_leader_ip"></a> [leader\_ip](#output\_leader\_ip) | n/a |
 | <a name="output_ssh_private_key"></a> [ssh\_private\_key](#output\_ssh\_private\_key) | n/a |
