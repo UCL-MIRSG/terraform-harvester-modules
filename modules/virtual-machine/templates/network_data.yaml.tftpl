@@ -2,7 +2,7 @@
       ethernets:
 %{ for network in networks ~}
         ${network.iface}:
-          ${ if network.ip != "" }
+          %{ if network.ip != "" }
           dhcp4: false
           addresses:
             - ${network.ip}/${network.cidr}

@@ -58,11 +58,6 @@ variable "ssh_private_key" {
   type = string
 }
 
-variable "enable_dhcp" {
-  type    = bool
-  default = false
-}
-
 variable "user_data" {
   type        = string
   description = "Data for cloud-init to use"

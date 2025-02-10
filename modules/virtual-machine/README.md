@@ -32,7 +32,6 @@ No modules.
 | <a name="input_additional_disks"></a> [additional\_disks](#input\_additional\_disks) | n/a | <pre>map(object({<br/>    name  = string<br/>    mount = string<br/>    size  = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | n/a | `number` | `2` | no |
 | <a name="input_efi_boot"></a> [efi\_boot](#input\_efi\_boot) | n/a | `bool` | n/a | yes |
-| <a name="input_enable_dhcp"></a> [enable\_dhcp](#input\_enable\_dhcp) | n/a | `bool` | `false` | no |
 | <a name="input_memory"></a> [memory](#input\_memory) | n/a | `string` | `"16Gi"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the vm | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Name of the namespace into which the VMs with be delployed. It must exist | `string` | n/a | yes |
