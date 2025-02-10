@@ -11,11 +11,11 @@ module "k3s_server_vm" {
   networks = {
     for key, value in var.networks : key =>
     {
-      cidr    = value.cidr
-      dns     = value.dns
-      gateway = value.gateway
+      cidr    = try(value.cidr, null)
+      dns     = try(value.dns, "")
+      gateway = try(value.gateway, "")
       iface   = key
-      ip      = value.ips[count.index]
+      ip      = try(value.ips[count.index], "")
       network = value.network
     }
   }
