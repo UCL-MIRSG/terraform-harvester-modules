@@ -2,6 +2,7 @@
       ethernets:
 %{ for network in networks ~}
         ${network.iface}:
+          ${ if network.ip != "" }
           dhcp4: false
           addresses:
             - ${network.ip}/${network.cidr}
@@ -12,4 +13,7 @@
           nameservers:
             addresses: [${network.dns}]
           %{ endif }
+          %{ else ~}
+          dhcp4: true
+          %{ endif ~}
 %{ endfor ~}
