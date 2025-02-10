@@ -39,7 +39,7 @@ No modules.
 | <a name="input_memory"></a> [memory](#input\_memory) | n/a | `string` | `"16Gi"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the vm | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Name of the namespace into which the VMs with be delployed. It must exist | `string` | n/a | yes |
-| <a name="input_networks"></a> [networks](#input\_networks) | Map of harvester VM networks to add NICs for | <pre>map(object({<br/>    ip      = string<br/>    cidr    = number<br/>    gateway = string<br/>    dns     = string<br/>    network = string<br/>    iface   = string<br/>  }))</pre> | n/a | yes |
+| <a name="input_networks"></a> [networks](#input\_networks) | Map of harvester VM networks to add NICs for | <pre>map(object({<br/>    ip      = optional(string, "")<br/>    cidr    = optional(number, null)<br/>    gateway = optional(string, "")<br/>    dns     = optional(string, "")<br/>    network = string<br/>    iface   = optional(string, "")<br/>  }))</pre> | n/a | yes |
 | <a name="input_root_disk_size"></a> [root\_disk\_size](#input\_root\_disk\_size) | n/a | `string` | `"30Gi"` | no |
 | <a name="input_run_strategy"></a> [run\_strategy](#input\_run\_strategy) | n/a | `string` | `"RerunOnFailure"` | no |
 | <a name="input_ssh_private_key"></a> [ssh\_private\_key](#input\_ssh\_private\_key) | n/a | `string` | n/a | yes |

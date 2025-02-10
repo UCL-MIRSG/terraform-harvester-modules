@@ -28,12 +28,12 @@ variable "namespace" {
 
 variable "networks" {
   type = map(object({
-    ip      = string
-    cidr    = number
-    gateway = string
-    dns     = string
+    ip      = optional(string, "")
+    cidr    = optional(number, null)
+    gateway = optional(string, "")
+    dns     = optional(string, "")
     network = string
-    iface   = string
+    iface   = optional(string, "")
   }))
 
   description = "Map of harvester VM networks to add NICs for"
