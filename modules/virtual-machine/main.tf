@@ -3,17 +3,6 @@ data "harvester_image" "vm_image" {
   namespace    = var.vm_image_namespace
 }
 
-resource "random_id" "secret" {
-  byte_length = 5
-}
-
-resource "harvester_cloudinit_secret" "cloud-config" {
-  name      = "cloud-config-${random_id.secret.hex}"
-  namespace = var.namespace
-
-  user_data = var.user_data
-}
-
 resource "harvester_virtualmachine" "vm" {
   name                 = var.name
   namespace            = var.namespace
@@ -68,7 +57,7 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   cloudinit {
-    user_data = harvester_cloudinit_secret.cloud-config.name
+    user_data = var.user_data
     network_data = templatefile("${path.module}/templates/network_data.yaml.tftpl", {
       networks = var.networks
     })

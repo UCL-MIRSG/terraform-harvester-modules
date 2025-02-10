@@ -7,14 +7,12 @@
 | <a name="requirement_harvester"></a> [harvester](#requirement\_harvester) | 0.6.4 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.1 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.2 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.6.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_harvester"></a> [harvester](#provider\_harvester) | 0.6.4 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.1 |
 
 ## Modules
 
@@ -24,9 +22,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [harvester_cloudinit_secret.cloud-config](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/resources/cloudinit_secret) | resource |
 | [harvester_virtualmachine.vm](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/resources/virtualmachine) | resource |
-| [random_id.secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/id) | resource |
 | [harvester_image.vm_image](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/data-sources/image) | data source |
 
 ## Inputs
@@ -51,5 +47,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_ip"></a> [ip](#output\_ip) | n/a |
 <!-- END_TF_DOCS -->
