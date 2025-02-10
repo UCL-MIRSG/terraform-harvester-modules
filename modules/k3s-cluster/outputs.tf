@@ -9,5 +9,9 @@ output "kubeconfig" {
 }
 
 output "leader_ip" {
-  value = var.networks[var.primary_interface].ips[0]
+  value = module.k3s_server_vm[0].ip
+}
+
+output "ips" {
+  value = module.k3s_server_vm.*.ip
 }

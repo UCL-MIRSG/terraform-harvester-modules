@@ -11,11 +11,11 @@ module "k3s_server_vm" {
   networks = {
     for key, value in var.networks : key =>
     {
-      cidr    = value.cidr
-      dns     = value.dns
-      gateway = value.gateway
+      cidr    = try(value.cidr, null)
+      dns     = try(value.dns, "")
+      gateway = try(value.gateway, "")
       iface   = key
-      ip      = value.ips[count.index]
+      ip      = try(value.ips[count.index], "")
       network = value.network
     }
   }
@@ -41,9 +41,9 @@ module "install_k3s" {
   calico_version     = var.calico_version
   cluster_vip        = var.cluster_vip
   data_dir           = var.data_dir
-  followers          = local.followers
+  follower_names     = local.follower_names
+  ips                = module.k3s_server_vm.*.ip
   k3s_version        = var.k3s_version
-  leader_ip          = local.leader_ip
   leader_name        = local.leader_name
   local_storage_path = var.local_storage_path
   metallb_version    = var.metallb_version
@@ -53,5 +53,5 @@ module "install_k3s" {
   ssh_common_args    = var.ssh_common_args
   ssh_private_key    = tls_private_key.ssh.private_key_openssh
   vm_username        = var.vm_username
-  workers            = local.workers
+  worker_names       = local.worker_names
 }

@@ -9,13 +9,13 @@ variable "cluster_vip" {}
 
 variable "data_dir" {}
 
-variable "followers" {}
+variable "ips" {}
 
 variable "k3s_version" {}
 
-variable "leader_ip" {}
-
 variable "leader_name" {}
+
+variable "follower_names" {}
 
 variable "local_storage_path" {}
 
@@ -33,4 +33,4 @@ variable "ssh_private_key" {}
 
 variable "vm_username" {}
 
-variable "workers" {}
+variable "worker_names" {}

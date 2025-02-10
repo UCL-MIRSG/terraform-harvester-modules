@@ -58,7 +58,7 @@ resource "harvester_virtualmachine" "vm" {
 
   cloudinit {
     user_data = var.user_data
-    network_data = var.enable_dhcp ? "" : templatefile("${path.module}/templates/network_data.yaml.tftpl", {
+    network_data = templatefile("${path.module}/templates/network_data.yaml.tftpl", {
       networks = var.networks
     })
   }
