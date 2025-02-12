@@ -1,0 +1,34 @@
+- name: Add endpoint-copier-operator chart repo
+  kubernetes.core.helm_repository:
+    name: suse-edge
+    repo_url: https://suse-edge.github.io/charts
+
+- name: Deploy endpoint-copier-operator helm chart
+  kubernetes.core.helm:
+    name: endpoint-copier-operator
+    chart_ref: suse-edge/endpoint-copier-operator
+    release_namespace: endpoint-copier-operator
+    create_namespace: true
+
+- name: Deploy kubeserver vip service
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: kubernetes-vip
+        namespace: default
+      spec:
+        internalTrafficPolicy: Cluster
+        externalTrafficPolicy: Cluster
+        ipFamilies:
+          - IPv4
+        ipFamilyPolicy: SingleStack
+        ports:
+          - name: https
+            port: 6443
+            protocol: TCP
+            targetPort: 6443
+        sessionAffinity: None
+        type: LoadBalancer
