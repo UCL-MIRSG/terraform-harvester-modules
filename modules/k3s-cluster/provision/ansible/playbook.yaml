@@ -7,30 +7,35 @@
       ansible.builtin.wait_for_connection:
         timeout: 60
 
-- name: Install k3s
+- name: Provision nodes
   hosts: k3s
   become: true
   gather_facts: true
   roles:
     - role: provision
-    - role: k3s
 
-- name: Install Calico and Metallb
+- name: Install k3s leader
   hosts: leader
   become: true
   roles:
+    - role: k3s
     - role: calico
     - role: metallb
       vars:
-        metallb_api_server_pool_name: api-server
-        metallb_ingress_pool_name: ingress
         metallb_addresses:
-          - name: "{{ metallb_api_server_pool_name }}"
+          - name: api-server
             ip: "{{ cluster_api_vip }}"
-          - name: "{{ metallb_ingress_pool_name }}"
+          - name: ingress
             ip: "{{ cluster_ingress_vip }}"
+    - role: endpoint_copier
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+
+- name: Install k3s on followers and workers
+  hosts: follower,worker
+  become: true
+  roles:
+    - role: k3s
 
 - name: OpenISCSI install
   hosts: k3s
@@ -48,3 +53,14 @@
         src: /etc/rancher/k3s/k3s.yaml
         dest: "{{ kubeconfig_path }}"
         flat: true
+
+- name: Modify kubeconfig file
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Replace IP in kubeconfig
+      ansible.builtin.lineinfile:
+        path: "{{ kubeconfig_path }}"
+        regexp: "server:"
+        line: "    server: https://{{ cluster_api_vip }}:6443"
+        state: present
