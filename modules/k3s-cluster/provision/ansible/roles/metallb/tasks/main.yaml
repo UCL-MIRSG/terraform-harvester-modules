@@ -65,28 +65,3 @@
         name: "{{ item.name }}"
         namespace: metallb-system
   loop: "{{ metallb_addresses }}"
-
-- name: Deploy LoadBalancer service for api-server
-  kubernetes.core.k8s:
-    state: present
-    definition:
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: kubernetes-api-vip
-        namespace: default
-        annotations:
-          metallb.universe.tf/address-pool: "{{ metallb_api_server_pool_name }}"
-      spec:
-        internalTrafficPolicy: Cluster
-        externalTrafficPolicy: Cluster
-        ipFamilies:
-          - IPv4
-        ipFamilyPolicy: SingleStack
-        ports:
-          - name: https
-            port: 6443
-            protocol: TCP
-            targetPort: 6443
-        sessionAffinity: None
-        type: LoadBalancer
