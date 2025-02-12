@@ -5,30 +5,43 @@
   tasks:
     - name: Wait for VM
       ansible.builtin.wait_for_connection:
-        timeout: 60
+        timeout: 120
 
-- name: Install k3s
+- name: Provision nodes
   hosts: k3s
   become: true
   gather_facts: true
   roles:
-    - provision
-    - k3s
+    - role: provision
 
-- name: Install Calico and Metallb
+- name: Install k3s leader
   hosts: leader
   become: true
   roles:
-    - calico
-    - metallb
+    - role: k3s
+    - role: calico
+    - role: metallb
+      vars:
+        metallb_addresses:
+          - name: api-server
+            ip: "{{ cluster_api_vip }}"
+          - name: ingress
+            ip: "{{ cluster_ingress_vip }}"
+    - role: endpoint_copier
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+
+- name: Install k3s on followers and workers
+  hosts: follower,worker
+  become: true
+  roles:
+    - role: k3s
 
 - name: OpenISCSI install
   hosts: k3s
   become: true
   roles:
-    - openiscsi
+    - role: openiscsi
 
 - name: Fetch kubeconfig
   hosts: leader
@@ -49,5 +62,5 @@
       ansible.builtin.lineinfile:
         path: "{{ kubeconfig_path }}"
         regexp: "server:"
-        line: "    server: https://{{ leader_ip }}:6443"
+        line: "    server: https://{{ cluster_api_vip }}:6443"
         state: present

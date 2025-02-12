@@ -5,7 +5,9 @@ variable "cluster_cidr" {
   default = "192.168.0.0/16"
 }
 
-variable "cluster_vip" {}
+variable "cluster_api_vip" {}
+
+variable "cluster_ingress_vip" {}
 
 variable "data_dir" {}
 

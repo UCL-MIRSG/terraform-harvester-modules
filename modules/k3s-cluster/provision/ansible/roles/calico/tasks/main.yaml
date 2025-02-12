@@ -48,6 +48,7 @@
     src: calico_bgp.yaml.j2
     dest: /tmp/calico_bgp.yaml
     mode: "0440"
+  when: calico_bgp_vip is defined
 
 - name: Use calicoctl to install BGP
   ansible.builtin.command:
@@ -57,3 +58,4 @@
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   changed_when: false
+  when: calico_bgp_vip is defined

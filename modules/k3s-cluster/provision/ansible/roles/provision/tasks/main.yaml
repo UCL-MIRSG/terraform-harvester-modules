@@ -13,3 +13,16 @@
   ansible.builtin.pip:
     name: kubernetes
     state: present
+
+- name: Download Helm install script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    dest: /tmp/get_helm.sh
+    mode: "0755"
+
+- name: Install Helm
+  ansible.builtin.command:
+    cmd: /tmp/get_helm.sh
+  environment:
+    HELM_INSTALL_DIR: /usr/bin
+  changed_when: false

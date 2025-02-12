@@ -16,7 +16,7 @@ locals {
     var.worker_names[k] => v
   }
 
-  k3s_install_args = [
+  k3s_common_install_args = [
     "--cluster-cidr=${var.cluster_cidr}",
     "--data-dir=${var.data_dir}",
     "--default-local-storage-path=${var.local_storage_path}",
@@ -38,13 +38,15 @@ locals {
       "-o ControlPath=~/%r@%h:%p",
       var.ssh_common_args
     ])
-    ansible_user       = var.vm_username
-    k3s_version        = var.k3s_version
-    kubeconfig_path    = local.kubeconfig_path
-    leader_ip          = local.leader_ip
-    node_token         = local.node_token
-    openiscsi_version  = var.openiscsi_version
-    private_registries = yamlencode(var.private_registries)
+    ansible_user        = var.vm_username
+    cluster_api_vip     = var.cluster_api_vip
+    cluster_ingress_vip = var.cluster_ingress_vip
+    k3s_version         = var.k3s_version
+    kubeconfig_path     = local.kubeconfig_path
+    leader_ip           = local.leader_ip
+    node_token          = local.node_token
+    openiscsi_version   = var.openiscsi_version
+    private_registries  = yamlencode(var.private_registries)
   }
 
   server_ansible_args = {

@@ -56,10 +56,11 @@ to create the necessary VMs. Example usage:
 module "k3s_cluster" {
   source = "github.com/UCL-MIRSG/terraform-harvester-modules//modules/k3s-cluster"
 
-  namespace         = "default"
-  primary_interface = "eth0"
-  cluster_vip      = "10.0.0.5"
-  vm_username      = "admin"
+  namespace           = "default"
+  primary_interface   = "eth0"
+  cluster_api_vip     = "10.0.0.5"
+  cluster_ingress_vip = "10.0.0.6"
+  vm_username         = "admin"
 
   # VM configuration
   cpu           = 2
@@ -68,9 +69,9 @@ module "k3s_cluster" {
   efi_boot      = true
 
   # K3s configuration
-  k3s_version      = "v1.27.3+k3s1"
-  calico_version   = "v3.26.1"
-  metallb_version  = "v0.13.10"
+  k3s_version      = "v1.30.2+k3s1"
+  calico_version   = "v3.28.1"
+  metallb_version  = "v0.14.8"
 
   # Network configuration for the VMs
   networks = {

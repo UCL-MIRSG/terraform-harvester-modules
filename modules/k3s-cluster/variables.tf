@@ -35,9 +35,14 @@ variable "cluster_name" {
   description = "Name of the cluster used to uniqify the vm names"
 }
 
-variable "cluster_vip" {
+variable "cluster_api_vip" {
   type        = string
-  description = "MetalLB Virtual IP to assign to cluster"
+  description = "MetalLB Virtual IP address to assign for the API server"
+}
+
+variable "cluster_ingress_vip" {
+  type        = string
+  description = "MetalLB Virtual IP address to assign for the Ingress controller"
 }
 
 variable "cpu" {
