@@ -26,7 +26,7 @@ resource "ansible_playbook" "k3s_leader" {
     calico_version      = var.calico_version
     k3s_install_args = join(" ", concat(local.k3s_install_args, [
       "--node-ip=${local.leader_ip}",
-      "--tls-san=${local.leader_ip}",
+      "--tls-san=${var.cluster_api_vip}",
       "--advertise-address=${local.leader_ip}",
       "--cluster-init"
     ]))
@@ -46,10 +46,10 @@ resource "ansible_playbook" "k3s_follower" {
     ansible_host = each.value
     k3s_install_args = join(" ", concat(local.k3s_install_args, [
       "--node-ip=${each.value}",
-      "--tls-san=${each.value}",
+      "--tls-san=${var.cluster_api_vip}",
       "--advertise-address=${each.value}"
     ]))
-    k3s_url = "https://${local.leader_ip}:6443"
+    k3s_url = "https://${var.cluster_api_vip}:6443"
   })
 }
 
@@ -65,7 +65,7 @@ resource "ansible_playbook" "k3s_worker" {
     ansible_host          = each.value
     k3s_role              = "agent"
     k3s_uninstall_command = "/usr/local/bin/k3s-agent-uninstall.sh"
-    k3s_url               = "https://${local.leader_ip}:6443"
+    k3s_url               = "https://${var.cluster_api_vip}:6443"
   })
 }
 
