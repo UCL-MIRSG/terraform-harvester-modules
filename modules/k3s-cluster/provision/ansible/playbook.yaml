@@ -12,15 +12,23 @@
   become: true
   gather_facts: true
   roles:
-    - provision
-    - k3s
+    - role: provision
+    - role: k3s
 
 - name: Install Calico and Metallb
   hosts: leader
   become: true
   roles:
-    - calico
-    - metallb
+    - role: calico
+    - role: metallb
+      vars:
+        metallb_api_server_pool_name: api-server
+        metallb_ingress_pool_name: ingress
+        metallb_addresses:
+          - name: "{{ metallb_api_server_pool_name }}"
+            ip: "{{ cluster_api_vip }}"
+          - name: "{{ metallb_ingress_pool_name }}"
+            ip: "{{ cluster_ingress_vip }}"
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
 
@@ -28,7 +36,7 @@
   hosts: k3s
   become: true
   roles:
-    - openiscsi
+    - role: openiscsi
 
 - name: Fetch kubeconfig
   hosts: leader
@@ -40,14 +48,3 @@
         src: /etc/rancher/k3s/k3s.yaml
         dest: "{{ kubeconfig_path }}"
         flat: true
-
-- name: Modify kubeconfig file
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Replace IP in kubeconfig
-      ansible.builtin.lineinfile:
-        path: "{{ kubeconfig_path }}"
-        regexp: "server:"
-        line: "    server: https://{{ leader_ip }}:6443"
-        state: present
