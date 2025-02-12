@@ -24,12 +24,11 @@ resource "ansible_playbook" "k3s_leader" {
     cluster_api_vip     = var.cluster_api_vip
     cluster_ingress_vip = var.cluster_ingress_vip
     calico_version      = var.calico_version
-    k3s_install_args = join(" ", concat(local.k3s_install_args, [
-      "--node-ip=${local.leader_ip}",
-      "--tls-san=${var.cluster_api_vip}",
-      "--advertise-address=${local.leader_ip}",
-      "--cluster-init"
-    ]))
+    k3s_install_args = join(" ", concat(
+      local.k3s_common_install_args,
+      local.k3s_server_install_args,
+      local.k3s_leader_install_args
+    ))
     metallb_version = var.metallb_version
   })
 }
@@ -44,11 +43,10 @@ resource "ansible_playbook" "k3s_follower" {
   replayable              = true
   extra_vars = merge(local.common_ansible_args, local.server_ansible_args, {
     ansible_host = each.value
-    k3s_install_args = join(" ", concat(local.k3s_install_args, [
-      "--node-ip=${each.value}",
-      "--tls-san=${var.cluster_api_vip}",
-      "--advertise-address=${each.value}"
-    ]))
+    k3s_install_args = join(" ", concat(
+      local.k3s_common_install_args,
+      local.k3s_server_install_args
+    ))
     k3s_url = "https://${var.cluster_api_vip}:6443"
   })
 }

@@ -16,7 +16,7 @@ locals {
     var.worker_names[k] => v
   }
 
-  k3s_install_args = [
+  k3s_common_install_args = [
     "--cluster-cidr=${var.cluster_cidr}",
     "--data-dir=${var.data_dir}",
     "--default-local-storage-path=${var.local_storage_path}",
@@ -26,6 +26,16 @@ locals {
     "--flannel-backend=none",
     "--flannel-iface=${var.primary_interface}", # default interface
     "--selinux",
+  ]
+
+  k3s_server_install_args = [
+    "--node-ip=${local.leader_ip}",
+    "--tls-san=${var.cluster_api_vip}",
+    "--advertise-address=${local.leader_ip}",
+  ]
+
+  k3s_leader_install_args = [
+    "--cluster-init",
   ]
 
   kubeconfig      = "k3s.yaml"
