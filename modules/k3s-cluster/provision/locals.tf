@@ -28,16 +28,6 @@ locals {
     "--selinux",
   ]
 
-  k3s_server_install_args = [
-    "--node-ip=${local.leader_ip}",
-    "--tls-san=${var.cluster_api_vip}",
-    "--advertise-address=${local.leader_ip}",
-  ]
-
-  k3s_leader_install_args = [
-    "--cluster-init",
-  ]
-
   kubeconfig      = "k3s.yaml"
   kubeconfig_path = "./${local.kubeconfig}"
 
@@ -48,13 +38,15 @@ locals {
       "-o ControlPath=~/%r@%h:%p",
       var.ssh_common_args
     ])
-    ansible_user       = var.vm_username
-    k3s_version        = var.k3s_version
-    kubeconfig_path    = local.kubeconfig_path
-    leader_ip          = local.leader_ip
-    node_token         = local.node_token
-    openiscsi_version  = var.openiscsi_version
-    private_registries = yamlencode(var.private_registries)
+    ansible_user        = var.vm_username
+    cluster_api_vip     = var.cluster_api_vip
+    cluster_ingress_vip = var.cluster_ingress_vip
+    k3s_version         = var.k3s_version
+    kubeconfig_path     = local.kubeconfig_path
+    leader_ip           = local.leader_ip
+    node_token          = local.node_token
+    openiscsi_version   = var.openiscsi_version
+    private_registries  = yamlencode(var.private_registries)
   }
 
   server_ansible_args = {
