@@ -41,4 +41,4 @@
     src: registries.yaml.j2
     dest: /etc/rancher/k3s/registries.yaml
     mode: "0600"
-  when: private_registries | length > 0
+  when: private_registries | from_yaml | length > 0
