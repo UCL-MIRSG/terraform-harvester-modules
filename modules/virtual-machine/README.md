@@ -4,7 +4,7 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.0 |
-| <a name="requirement_harvester"></a> [harvester](#requirement\_harvester) | 0.6.4 |
+| <a name="requirement_harvester"></a> [harvester](#requirement\_harvester) | 0.6.6 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.1 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.2 |
 
@@ -12,7 +12,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_harvester"></a> [harvester](#provider\_harvester) | 0.6.4 |
+| <a name="provider_harvester"></a> [harvester](#provider\_harvester) | 0.6.6 |
 
 ## Modules
 
@@ -22,8 +22,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [harvester_virtualmachine.vm](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/resources/virtualmachine) | resource |
-| [harvester_image.vm_image](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/data-sources/image) | data source |
+| [harvester_virtualmachine.vm](https://registry.terraform.io/providers/harvester/harvester/0.6.6/docs/resources/virtualmachine) | resource |
+| [harvester_image.vm_image](https://registry.terraform.io/providers/harvester/harvester/0.6.6/docs/data-sources/image) | data source |
 
 ## Inputs
 
@@ -40,9 +40,9 @@ No modules.
 | <a name="input_run_strategy"></a> [run\_strategy](#input\_run\_strategy) | n/a | `string` | `"RerunOnFailure"` | no |
 | <a name="input_ssh_private_key"></a> [ssh\_private\_key](#input\_ssh\_private\_key) | n/a | `string` | n/a | yes |
 | <a name="input_user_data"></a> [user\_data](#input\_user\_data) | Data for cloud-init to use | `string` | n/a | yes |
-| <a name="input_vm_image"></a> [vm\_image](#input\_vm\_image) | OS image to use | `string` | `"rhel-9.3"` | no |
-| <a name="input_vm_image_namespace"></a> [vm\_image\_namespace](#input\_vm\_image\_namespace) | OS image namespace to use | `string` | `""` | no |
-| <a name="input_vm_tags"></a> [vm\_tags](#input\_vm\_tags) | n/a | `map(any)` | n/a | yes |
+| <a name="input_vm_image"></a> [vm\_image](#input\_vm\_image) | OS image to use | `string` | n/a | yes |
+| <a name="input_vm_image_namespace"></a> [vm\_image\_namespace](#input\_vm\_image\_namespace) | OS image namespace to use | `string` | n/a | yes |
+| <a name="input_vm_tags"></a> [vm\_tags](#input\_vm\_tags) | n/a | `map(any)` | `{}` | no |
 | <a name="input_vm_username"></a> [vm\_username](#input\_vm\_username) | n/a | `string` | n/a | yes |
 
 ## Outputs
