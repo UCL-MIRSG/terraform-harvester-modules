@@ -65,13 +65,11 @@ variable "user_data" {
 
 variable "vm_image" {
   type        = string
-  default     = "rhel-9.3"
   description = "OS image to use"
 }
 
 variable "vm_image_namespace" {
   type        = string
-  default     = ""
   description = "OS image namespace to use"
 }
 
