@@ -4,8 +4,8 @@ A terraform module for installing k3s on harvester VMs.
 
 ## Usage
 
-This repository provides two Terraform modules for deploying infrastructure
-on Harvester:
+This repository provides two Terraform modules for deploying infrastructure on
+Harvester:
 
 ### Virtual Machine Module
 
@@ -42,9 +42,13 @@ module "vm" {
 
 ### K3s Cluster Module
 
-The `k3s-cluster` module helps you deploy a high-availability [k3s](https://k3s.io/)
-Kubernetes cluster on Harvester. This module internally uses the `virtual-machine`
-module to create the necessary VMs. This module provides `user_data` to the virtual machines, and is configured to install k3s using the default operating system user in the machine image being used (set using the `vm_image` variable). As such the `vm_username` variable must be set accordingly (e.g. `cloud-user` for a RHEL machine image).
+The `k3s-cluster` module helps you deploy a high-availability
+[k3s](https://k3s.io/) Kubernetes cluster on Harvester. This module internally
+uses the `virtual-machine` module to create the necessary VMs. This module
+provides `user_data` to the virtual machines, and is configured to install k3s
+using the default operating system user in the machine image being used (set
+using the `vm_image` variable). As such the `vm_username` variable must be set
+accordingly (e.g. `cloud-user` for a RHEL machine image).
 
 Example usage which would deploy a 3-node cluster:
 
