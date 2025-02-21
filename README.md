@@ -1,4 +1,4 @@
-# terraform-harvester-k3s
+# terraform-harvester-modules
 
 A terraform module for installing k3s on harvester VMs.
 
