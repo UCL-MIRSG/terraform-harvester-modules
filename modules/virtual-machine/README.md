@@ -4,7 +4,7 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.0 |
-| <a name="requirement_harvester"></a> [harvester](#requirement\_harvester) | 0.6.4 |
+| <a name="requirement_harvester"></a> [harvester](#requirement\_harvester) | 0.6.6 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.1 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.2 |
 
@@ -22,8 +22,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [harvester_virtualmachine.vm](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/resources/virtualmachine) | resource |
-| [harvester_image.vm_image](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/data-sources/image) | data source |
+| [harvester_virtualmachine.vm](https://registry.terraform.io/providers/harvester/harvester/0.6.6/docs/resources/virtualmachine) | resource |
+| [harvester_image.vm_image](https://registry.terraform.io/providers/harvester/harvester/0.6.6/docs/data-sources/image) | data source |
 
 ## Inputs
 
