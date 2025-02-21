@@ -1,13 +1,9 @@
 # terraform-harvester-modules
 
-A terraform module for installing k3s on harvester VMs.
+Terraform modules for deploying virtual machines and [k3s](https://k3s.io/)
+clusters on Harvester.
 
-## Usage
-
-This repository provides two Terraform modules for deploying infrastructure on
-Harvester:
-
-### Virtual Machine Module
+## Virtual Machine Module
 
 The `virtual-machine` module allows you to create and manage virtual machines on
 Harvester. Example usage:
@@ -40,7 +36,7 @@ module "vm" {
 }
 ```
 
-### K3s Cluster Module
+## k3s Cluster Module
 
 The `k3s-cluster` module helps you deploy a high-availability
 [k3s](https://k3s.io/) Kubernetes cluster on Harvester. This module internally
