@@ -1,4 +1,3 @@
-
 variable "name" {
   type        = string
   description = "Name of the vm"
@@ -74,7 +73,8 @@ variable "vm_image_namespace" {
 }
 
 variable "vm_tags" {
-  type = map(any)
+  type    = map(any)
+  default = {}
 }
 
 variable "vm_username" {
