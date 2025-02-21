@@ -23,9 +23,9 @@ module "vm" {
       size  = "100Gi"
     }
   }
-  efi_boot         = true
-  name             = "my-vm"
-  namespace        = "default"
+  efi_boot  = true
+  name      = "my-vm"
+  namespace = "default"
   networks = {
     eth0 = {
       ip      = "10.0.0.2"
@@ -62,7 +62,7 @@ module "k3s_cluster" {
   namespace           = "default"
   networks = {
     eth0 = {
-      ips      = ["10.0.0.2", "10.0.0.3", "10.0.0.4"]
+      ips     = ["10.0.0.2", "10.0.0.3", "10.0.0.4"]
       cidr    = 24
       gateway = "10.0.0.1"
       dns     = "10.0.0.1"
