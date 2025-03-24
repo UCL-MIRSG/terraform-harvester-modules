@@ -64,8 +64,8 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   timeouts {
-    create = "10m"
-    delete = "10m"
-    update = "10m"
+    create = var.timeout
+    delete = var.timeout
+    update = var.timeout
   }
 }

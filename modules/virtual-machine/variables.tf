@@ -57,6 +57,11 @@ variable "ssh_private_key" {
   type = string
 }
 
+variable "timeout" {
+  type    = string
+  default = "10m"
+}
+
 variable "user_data" {
   type        = string
   description = "Data for cloud-init to use"
