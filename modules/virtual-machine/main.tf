@@ -62,4 +62,10 @@ resource "harvester_virtualmachine" "vm" {
       networks = var.networks
     })
   }
+
+  timeouts {
+    create = "10m"
+    delete = "10m"
+    update = "10m"
+  }
 }
