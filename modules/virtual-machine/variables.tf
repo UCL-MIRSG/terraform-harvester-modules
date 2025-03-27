@@ -9,6 +9,7 @@ variable "additional_disks" {
     mount = string
     size  = string
   }))
+  default = {}
 }
 
 variable "cpu" {
@@ -17,7 +18,8 @@ variable "cpu" {
 }
 
 variable "efi_boot" {
-  type = bool
+  type    = bool
+  default = false
 }
 
 variable "namespace" {
