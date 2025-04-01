@@ -4,7 +4,7 @@ terraform {
   required_providers {
     random = {
       source  = "hashicorp/random"
-      version = "3.6.2"
+      version = "3.7.1"
     }
 
     remote = {
@@ -14,7 +14,7 @@ terraform {
 
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.5"
+      version = "4.0.6"
     }
   }
 }
