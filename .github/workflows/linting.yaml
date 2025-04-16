@@ -26,7 +26,7 @@ jobs:
       - name: Install terraform
         uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
 
-      - uses: UCL-MIRSG/.github/actions/linting@6e57c2a63562b64eab1a9eb1f37cd66c40afd647 # v0
+      - uses: UCL-MIRSG/.github/actions/linting@49c9af6b750d9de3bbdcb3cbba3806c96bc3b486 # v0
         with:
           ansible-roles-config: ./modules/k3s-cluster/provision/ansible/requirements.yaml
           pre-commit-config: ./.pre-commit-config.yaml
