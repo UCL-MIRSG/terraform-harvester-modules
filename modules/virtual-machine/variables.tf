@@ -12,6 +12,11 @@ variable "additional_disks" {
   default = {}
 }
 
+variable "cloudinit_type" {
+  type    = string
+  default = "noCloud"
+}
+
 variable "cpu" {
   type    = number
   default = 2

@@ -57,6 +57,7 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   cloudinit {
+    type      = var.cloudinit_type
     user_data = var.user_data
     network_data = templatefile("${path.module}/templates/network_data.yaml.tftpl", {
       networks = var.networks
