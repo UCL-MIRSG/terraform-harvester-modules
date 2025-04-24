@@ -1,0 +1,20 @@
+---
+name: links
+
+on:
+  push:
+    branches:
+      - main
+      - renovate/**
+  pull_request:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check links
+        uses: UCL-MIRSG/.github/actions/links@49c9af6b750d9de3bbdcb3cbba3806c96bc3b486 # v0
+        with:
+          app-id: ${{ vars.LINKS_APP_ID }}
+          app-pem: ${{ secrets.LINKS_PRIVATE_KEY }}
