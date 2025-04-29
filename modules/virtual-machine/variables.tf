@@ -4,12 +4,15 @@ variable "name" {
 }
 
 variable "additional_disks" {
-  type = map(object({
-    name  = string
-    mount = string
-    size  = string
+  type = list(object({
+    boot_order = number
+    bus        = string
+    name       = string
+    mount      = optional(string, "")
+    size       = string
+    type       = string
   }))
-  default = {}
+  default = []
 }
 
 variable "cloudinit_type" {
@@ -22,6 +25,31 @@ variable "cpu" {
   default = 2
 }
 
+variable "disk_boot_order" {
+  type    = number
+  default = 1
+}
+
+variable "disk_bus" {
+  type    = string
+  default = "virtio"
+}
+
+variable "disk_name" {
+  type    = string
+  default = "rootdisk"
+}
+
+variable "disk_size" {
+  type    = string
+  default = "30Gi"
+}
+
+variable "disk_type" {
+  type    = string
+  default = "disk"
+}
+
 variable "efi_boot" {
   type    = bool
   default = false
@@ -32,14 +60,16 @@ variable "namespace" {
   description = "Name of the namespace into which the VMs with be delployed. It must exist"
 }
 
+variable "network_data" {
+  type        = string
+  description = "Data for cloud-init to use"
+  default     = ""
+}
+
 variable "networks" {
-  type = map(object({
-    ip      = optional(string, "")
-    cidr    = optional(number, null)
-    gateway = optional(string, "")
-    dns     = optional(string, "")
+  type = list(object({
     network = string
-    iface   = optional(string, "")
+    iface   = string
   }))
 
   description = "Map of harvester VM networks to add NICs for"
@@ -48,11 +78,6 @@ variable "networks" {
 variable "memory" {
   type    = string
   default = "16Gi"
-}
-
-variable "root_disk_size" {
-  type    = string
-  default = "30Gi"
 }
 
 variable "run_strategy" {

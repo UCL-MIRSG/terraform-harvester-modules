@@ -24,7 +24,7 @@ resource "harvester_virtualmachine" "vm" {
   dynamic "network_interface" {
     for_each = var.networks
     content {
-      name           = network_interface.key
+      name           = network_interface.value.iface
       network_name   = network_interface.value.network
       wait_for_lease = true
       model          = "virtio"
@@ -33,11 +33,11 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   disk {
-    name       = "rootdisk"
-    type       = "disk"
-    size       = var.root_disk_size
-    bus        = "virtio"
-    boot_order = 1
+    name       = var.disk_name
+    type       = var.disk_type
+    size       = var.disk_size
+    bus        = var.disk_bus
+    boot_order = var.disk_boot_order
 
     image       = data.harvester_image.vm_image.id
     auto_delete = true
@@ -48,20 +48,19 @@ resource "harvester_virtualmachine" "vm" {
 
     content {
       auto_delete = true
-      bus         = "scsi"
+      boot_order  = disk.value.boot_order
+      bus         = disk.value.bus
       hot_plug    = true
       name        = disk.value.name
       size        = disk.value.size
-      type        = "disk"
+      type        = disk.value.type
     }
   }
 
   cloudinit {
-    type      = var.cloudinit_type
-    user_data = var.user_data
-    network_data = templatefile("${path.module}/templates/network_data.yaml.tftpl", {
-      networks = var.networks
-    })
+    type         = var.cloudinit_type
+    user_data    = var.user_data
+    network_data = var.network_data
   }
 
   timeouts {
