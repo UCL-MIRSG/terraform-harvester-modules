@@ -29,9 +29,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_additional_disks"></a> [additional\_disks](#input\_additional\_disks) | n/a | <pre>list(object({<br/>    boot_order = number<br/>    bus        = string<br/>    name       = string<br/>    mount      = optional(string, "")<br/>    size       = string<br/>    type       = string<br/>  }))</pre> | `[]` | no |
+| <a name="input_additional_disks"></a> [additional\_disks](#input\_additional\_disks) | n/a | <pre>list(object({<br/>    auto_delete = optional(bool, false)<br/>    boot_order = number<br/>    bus        = string<br/>    hot_plug   = optional(bool, false)<br/>    name       = string<br/>    mount      = optional(string, "")<br/>    size       = string<br/>    type       = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_cloudinit_type"></a> [cloudinit\_type](#input\_cloudinit\_type) | n/a | `string` | `"noCloud"` | no |
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | n/a | `number` | `2` | no |
+| <a name="input_disk_auto_delete"></a> [disk\_auto\_delete](#input\_disk\_auto\_delete) | n/a | `bool` | `false` | no |
 | <a name="input_disk_boot_order"></a> [disk\_boot\_order](#input\_disk\_boot\_order) | n/a | `number` | `1` | no |
 | <a name="input_disk_bus"></a> [disk\_bus](#input\_disk\_bus) | n/a | `string` | `"virtio"` | no |
 | <a name="input_disk_name"></a> [disk\_name](#input\_disk\_name) | n/a | `string` | `"rootdisk"` | no |
