@@ -20,7 +20,6 @@ module "k3s_server_vm" {
       network = value.network
     }
   ]
-  ssh_private_key = tls_private_key.ssh.private_key_openssh
   user_data = templatefile("${path.module}/templates/user_data.yaml.tftpl", {
     cluster_vip         = var.cluster_vip
     control_nodes_count = var.control_nodes
