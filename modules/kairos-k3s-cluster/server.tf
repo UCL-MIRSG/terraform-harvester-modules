@@ -9,6 +9,7 @@ module "k3s_server_vm" {
   disk_name        = var.iso_disk_name
   disk_size        = var.iso_disk_size
   disk_type        = "cd-rom"
+  efi_boot         = var.efi_boot
   memory           = var.memory
   name             = "${var.cluster_name}-vm-${count.index}"
   namespace        = var.cluster_namespace

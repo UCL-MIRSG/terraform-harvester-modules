@@ -36,6 +36,11 @@ variable "cpu" {
   default = 4
 }
 
+variable "efi_boot" {
+  type    = bool
+  default = false
+}
+
 variable "iso_disk_image" {
   type        = string
   description = "OS image to use"
