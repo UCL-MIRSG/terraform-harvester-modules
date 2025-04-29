@@ -5,8 +5,10 @@ variable "name" {
 
 variable "additional_disks" {
   type = list(object({
+    auto_delete = optional(bool, false)
     boot_order = number
     bus        = string
+    hot_plug   = optional(bool, false)
     name       = string
     mount      = optional(string, "")
     size       = string
@@ -23,6 +25,11 @@ variable "cloudinit_type" {
 variable "cpu" {
   type    = number
   default = 2
+}
+
+variable "disk_auto_delete" {
+  type    = bool
+  default = false
 }
 
 variable "disk_boot_order" {

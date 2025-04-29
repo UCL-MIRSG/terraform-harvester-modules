@@ -40,17 +40,17 @@ resource "harvester_virtualmachine" "vm" {
     boot_order = var.disk_boot_order
 
     image       = data.harvester_image.vm_image.id
-    auto_delete = true
+    auto_delete = var.disk_auto_delete
   }
 
   dynamic "disk" {
     for_each = var.additional_disks
 
     content {
-      auto_delete = true
+      auto_delete = disk.value.auto_delete
       boot_order  = disk.value.boot_order
       bus         = disk.value.bus
-      hot_plug    = true
+      hot_plug    = disk.value.hot_plug
       name        = disk.value.name
       size        = disk.value.size
       type        = disk.value.type
