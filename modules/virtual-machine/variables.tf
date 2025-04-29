@@ -29,7 +29,7 @@ variable "cpu" {
 
 variable "disk_auto_delete" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "disk_boot_order" {
@@ -75,8 +75,12 @@ variable "network_data" {
 
 variable "networks" {
   type = list(object({
-    network = string
+    cidr    = optional(string, "")
+    dns     = optional(string, "")
+    gateway = optional(string, "")
     iface   = string
+    ip      = optional(string, "")
+    network = string
   }))
 
   description = "Map of harvester VM networks to add NICs for"
@@ -92,8 +96,9 @@ variable "run_strategy" {
   default = "RerunOnFailure"
 }
 
-variable "ssh_private_key" {
+variable "ssh_public_key" {
   type = string
+  default = ""
 }
 
 variable "timeout" {
@@ -104,6 +109,13 @@ variable "timeout" {
 variable "user_data" {
   type        = string
   description = "Data for cloud-init to use"
+  default = ""
+}
+
+variable "vm_description" {
+  type        = string
+  description = "Description of the VM"
+  default     = ""
 }
 
 variable "vm_image" {

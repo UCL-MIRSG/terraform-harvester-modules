@@ -8,7 +8,7 @@ resource "harvester_virtualmachine" "vm" {
   namespace            = var.namespace
   restart_after_update = true
   run_strategy         = var.run_strategy
-  description          = "Rancher k3s ${data.harvester_image.vm_image.display_name}"
+  description          = var.vm_description != "" ? var.vm_description : "${data.harvester_image.vm_image.display_name}"
   tags                 = var.vm_tags
 
   cpu    = var.cpu
@@ -59,8 +59,13 @@ resource "harvester_virtualmachine" "vm" {
 
   cloudinit {
     type         = var.cloudinit_type
-    user_data    = var.user_data
-    network_data = var.network_data
+    user_data    =  var.user_data != "" ? var.user_data : templatefile("${path.module}/templates/user_data.yaml.tftpl", {
+      ssh_public_key   = var.ssh_public_key
+      additional_disks = var.additional_disks
+    })
+    network_data = var.network_data != "" ? var.network_data : templatefile("${path.module}/templates/network_data.yaml.tftpl", {
+      networks = var.networks
+    })
   }
 
   timeouts {
