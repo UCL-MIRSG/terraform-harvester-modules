@@ -1,0 +1,72 @@
+#cloud-config
+
+install:
+  device: auto
+  auto: true
+  reboot: true
+  %{ if kairos_os_image != "" }
+  source: ${kairos_os_image}
+  %{ endif ~}
+
+users:
+  - name: kairos
+    passwd: kairos
+    groups:
+      - admin # This user needs to be part of the admin group
+    ssh_authorized_keys:
+      - ${ssh_public_key}
+
+stages:
+  initramfs:
+    - name: Setup hostname
+      hostname: ${hostname}
+    - files:
+        - path: /etc/systemd/network/01-man.network
+          permissions: 644
+          content: |
+          %{~ for network in networks ~}
+            [Match]
+            Name=${network.alias}
+
+            [Network]
+            %{~ if network.ip != "" ~}
+            Address=${network.ip}/${network.cidr}
+            %{~ if network.gateway != "" ~}
+            Gateway=${network.gateway}
+            %{~ endif ~}
+            %{~ if network.dns != "" ~}
+            DNS=${network.dns}
+            %{ endif ~}
+            %{ else ~}
+            DHCP=yes
+            %{ endif ~}
+          %{ endfor ~}
+
+p2p:
+  disable_dht: false
+  network_id: ${p2p_network_id}
+  network_token: ${p2p_network_token}
+  auto:
+    enable: true
+    ha:
+      enable: true
+      master_nodes: ${control_nodes_count}
+  vpn:
+    create: true
+    enable: true
+
+kubevip:
+  enabled: true
+  eip: ${cluster_vip}
+
+k3s:
+  enabled: true
+  args:
+    - --disable=traefik,servicelb
+
+bundles:
+  - targets:
+      - run://quay.io/kairos/community-bundles:system-upgrade-controller_latest
+
+suc:
+  version: v0.15.2
