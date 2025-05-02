@@ -3,6 +3,14 @@ data "harvester_image" "vm_image" {
   namespace    = var.vm_image_namespace
 }
 
+resource "harvester_cloudinit_secret" "user_data_secret" {
+  name      = "${var.name}-cloudinit"
+  namespace = var.namespace
+  user_data = var.user_data != "" ? var.user_data : templatefile("${path.module}/templates/user_data.yaml.tftpl", {
+    ssh_public_key   = var.ssh_public_key
+    additional_disks = var.additional_disks
+  })
+}
 resource "harvester_virtualmachine" "vm" {
   name                 = var.name
   namespace            = var.namespace
@@ -58,12 +66,9 @@ resource "harvester_virtualmachine" "vm" {
   }
 
   cloudinit {
-    type         = var.cloudinit_type
-    user_data    =  var.user_data != "" ? var.user_data : templatefile("${path.module}/templates/user_data.yaml.tftpl", {
-      ssh_public_key   = var.ssh_public_key
-      additional_disks = var.additional_disks
-    })
-    network_data = var.network_data != "" ? var.network_data : templatefile("${path.module}/templates/network_data.yaml.tftpl", {
+    type                  = var.cloudinit_type
+    user_data_secret_name = harvester_cloudinit_secret.user_data_secret.name
+    network_data          = var.network_data != "" ? var.network_data : templatefile("${path.module}/templates/network_data.yaml.tftpl", {
       networks = var.networks
     })
   }
