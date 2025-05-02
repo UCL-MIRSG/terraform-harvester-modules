@@ -5,7 +5,7 @@ variable "name" {
 
 variable "additional_disks" {
   type = list(object({
-    auto_delete = optional(bool, false)
+    auto_delete = optional(bool, true)
     boot_order = number
     bus        = string
     hot_plug   = optional(bool, false)
