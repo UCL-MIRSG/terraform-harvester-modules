@@ -73,7 +73,7 @@ your own files via the `network_data` and `user_data` variables.
 Note that the IP addresses and namespaces given here are illustrative only and
 should be changed.
 
-## k3s Cluster Module
+## k3s-cluster Module
 
 The `k3s-cluster` module helps you deploy a high-availability
 [k3s](https://k3s.io/) Kubernetes cluster on Harvester. This module internally
@@ -108,8 +108,61 @@ module "k3s_cluster" {
 }
 ```
 
+## kairos-k3s-cluster module
+
+The `kairos-k3s-cluster` module helps you deploy a high-availablity
+[k3s](https://k3s.io/) Kubernetes cluster on Harvester with virtual machines
+deployed using an immutable operating system. [kairos](https://kairos.io/)
+provides a means to turn a Linux system, and preferred Kubernetes distribution,
+into a secure bootable image. Here users of the module can specify both the
+kairos ISO and container image to be deployed which will form the final OS
+running in the VMs. Although this supports multiple different Kubernetes
+distributions we strongly encourage the use of k3s. In the example below the
+kairos Alpine ISO is used to deploy a Rocky Linux container image which has k3s
+baked in. The
+[system-upgrade-controller](https://github.com/rancher/system-upgrade-controller)
+is installed in the cluster to provide a means to manage OS and Kubernetes
+distribution upgrades in a zero-downtime manner.
+
+Here [edgevpn](https://github.com/mudler/edgevpn/tree/master) and
+[kubevip](https://kube-vip.io/) configures a peer-to-peer mesh and a virtual IP
+address for the cluster (instead of [metallb](https://metallb.io/) which is used
+in the `k3s-cluster` module).
+
+```hcl
+module "cluster" {
+  source = "github.com/UCL-ARC/terraform-harvester-modules//modules/kairos-k3s-cluster"
+
+  cluster_name             = "my-cluster"
+  cluster_namespace        = "default"
+  cluster_vip              = "10.0.0.5"
+  efi_boot                 = true
+  iso_disk_image           = "kairos-alpine"
+  iso_disk_image_namespace = "default"
+  iso_disk_name            = "bootstrap"
+  iso_disk_size            = "10Gi"
+  networks = {
+    eth0 = {
+      ips     = ["10.0.0.2", "10.0.0.3", "10.0.0.4"]
+      cidr    = 24
+      gateway = "10.0.0.1"
+      dns     = "10.0.0.1"
+      network = "default/net"
+    }
+  }
+  root_disk_container_image = "docker:quay.io/kairos/rockylinux:9-standard-amd64-generic-v3.4.2-k3sv1.32.3-k3s1"
+  ssh_public_key            = file("${path.root}/ssh-key.pub")
+  ssh_private_key_path      = file("${path.root}/ssh-key")
+  vm_username               = "kairos"
+  vm_tags = {
+      ssh-user = "kairos"
+  }
+}
+```
+
 For detailed information about each module's variables and outputs, please refer
 to the README files in their respective directories:
 
-- [Virtual Machine Module Documentation](modules/virtual-machine/README.md)
-- [K3s Cluster Module Documentation](modules/k3s-cluster/README.md)
+- [virtual-machine Module Documentation](modules/virtual-machine/README.md)
+- [k3s-cluster Module Documentation](modules/k3s-cluster/README.md)
+- [kairos-k3s-cluster Module Documentation](modules/kairos-k3s-cluster/)
