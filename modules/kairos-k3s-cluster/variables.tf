@@ -100,6 +100,23 @@ variable "root_disk_size" {
   default = "30Gi"
 }
 
+variable "ssh_ca_public_key" {
+  type        = string
+  description = "SSH CA public key to use for the VMs"
+  default     = ""
+}
+
+variable "ssh_public_key" {
+  type        = string
+  description = "SSH public key to use for the VMs"
+  default     = ""
+}
+
+variable "ssh_private_key_path" {
+  type        = string
+  description = "Path to the SSH private key to use for the VMs"
+}
+
 variable "ssh_common_args" {
   type    = string
   default = ""

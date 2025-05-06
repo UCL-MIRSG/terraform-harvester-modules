@@ -8,7 +8,7 @@ resource "ansible_playbook" "kubeconfig" {
   extra_vars = {
     ansible_host                 = local.leader_ip
     ansible_user                 = var.vm_username
-    ansible_ssh_private_key_file = local_sensitive_file.ssh_key.filename
+    ansible_ssh_private_key_file = var.ssh_private_key_path
     ansible_ssh_common_args = join(" ", [
       "-o StrictHostKeyChecking=accept-new",
       "-o ControlPath=~/%r@%h:%p",

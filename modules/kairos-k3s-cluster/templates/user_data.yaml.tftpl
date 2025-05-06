@@ -13,14 +13,27 @@ users:
     passwd: kairos
     groups:
       - admin # This user needs to be part of the admin group
+    %{~ if ssh_public_key != "" ~}
     ssh_authorized_keys:
       - ${ssh_public_key}
+    %{~ endif ~}
 
 stages:
   initramfs:
     - name: Setup hostname
       hostname: ${hostname}
     - files:
+        %{~ if ssh_ca_public_key != "" ~}
+        - path: /etc/ssh/trusted-user-ca-key.pem
+          permissions: 644
+          content: |
+            ${ssh_ca_public_key}
+        - path: /etc/ssh/sshd_config.d/00-trusted-keys.conf
+          permissions: 600
+          content: |+
+            PubkeyAuthentication yes
+            TrustedUserCAKeys /etc/ssh/trusted-user-ca-key.pem
+        %{~ endif ~}
         - path: /etc/systemd/network/01-man.network
           permissions: 644
           content: |

@@ -40,7 +40,8 @@ module "k3s_server_vm" {
     }
     p2p_network_id    = local.p2p_network_id
     p2p_network_token = local.p2p_network_token
-    ssh_public_key    = tls_private_key.ssh.public_key_openssh
+    ssh_ca_public_key = var.ssh_ca_public_key
+    ssh_public_key    = var.ssh_public_key
   })
   vm_image           = var.iso_disk_image
   vm_image_namespace = var.iso_disk_image_namespace
